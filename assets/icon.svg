@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="U.S. Weather Tracker icon">
+  <defs><linearGradient id="night" x2="1" y2="1"><stop stop-color="#143348"/><stop offset="1" stop-color="#0b1523"/></linearGradient></defs>
+  <rect width="512" height="512" rx="112" fill="url(#night)"/>
+  <circle cx="247" cy="210" r="95" fill="#6bd8d0"/>
+  <path d="M105 309c45-27 88-27 132 0s87 27 132 0 68-27 96-10" fill="none" stroke="#eaf3f8" stroke-linecap="round" stroke-width="29"/>
+  <path d="M124 371c35-20 70-20 106 0s70 20 106 0 68-20 102 0" fill="none" stroke="#efc579" stroke-linecap="round" stroke-width="24"/>
+</svg>

@@ -1,0 +1,14 @@
+{
+  "name": "U.S. Weather Tracker",
+  "short_name": "Weather Tracker",
+  "description": "Daily U.S. airport observations from the National Weather Service.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0b1523",
+  "theme_color": "#0b1523",
+  "icons": [
+    { "src": "./assets/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "./assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

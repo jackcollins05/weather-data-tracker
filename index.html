@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1523">
+  <meta name="description" content="Daily U.S. airport weather observations from the National Weather Service.">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./assets/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./assets/icon-192.png">
+  <link rel="stylesheet" href="./css/styles.css">
+  <title>Today · U.S. Weather Tracker</title>
+</head>
+<body data-page="today">
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="./index.html" aria-label="U.S. Weather Tracker home"><span class="brand-mark" aria-hidden="true">◒</span><span>U.S. Weather Tracker</span></a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="./index.html" aria-current="page">Today</a>
+        <a href="./browse.html">Browse</a>
+        <a href="./trends.html">Trends</a>
+      </nav>
+      <span class="header-tag">NWS · 12 STATIONS</span>
+    </div>
+  </header>
+  <main class="shell page">
+    <section class="page-intro">
+      <div><p class="eyebrow">Daily observation desk</p><h1>Weather at a glance.</h1><p class="lede">A clear view of the latest airport observations and what changed across the United States.</p></div>
+      <div class="run-meta"><span class="meta-label">LAST RUN · UTC</span><strong id="last-run">Awaiting first run</strong><span id="latest-date" class="muted">No observation date yet</span></div>
+    </section>
+    <div id="data-message" class="notice" role="status" aria-live="polite">Loading observation data…</div>
+    <section class="stat-grid" aria-label="Daily counts">
+      <article class="stat-card"><span>Items today</span><strong id="count-items">—</strong><small>Rows on the latest run date</small></article>
+      <article class="stat-card"><span>New today</span><strong id="count-new">—</strong><small>Since previous successful date</small></article>
+      <article class="stat-card"><span>Gone today</span><strong id="count-gone">—</strong><small>Since previous successful date</small></article>
+      <article class="stat-card"><span>Days with data</span><strong id="count-days">—</strong><small id="first-run">First run: —</small></article>
+    </section>
+    <section class="section split-section">
+      <div class="card">
+        <div class="section-heading"><div><p class="eyebrow">Change watch</p><h2>Biggest temperature moves</h2></div><span class="pill">TOP 5 · °F</span></div>
+        <p id="moves-context" class="section-copy">Comparing the latest and previous successful observation dates.</p>
+        <div id="biggest-moves" class="move-list empty-state">Waiting for observations.</div>
+      </div>
+      <div class="card">
+        <div class="section-heading"><div><p class="eyebrow">Collection health</p><h2>Source status</h2></div><span class="pill">LIVE HTML</span></div>
+        <p class="section-copy">Each station is fetched independently from public NWS observation-history pages.</p>
+        <div id="source-status" class="source-grid"></div>
+      </div>
+    </section>
+    <section class="section card table-card">
+      <div class="section-heading"><div><p class="eyebrow">Observation board</p><h2>Latest station values</h2></div><span id="table-date" class="pill">NO DATA YET</span></div>
+      <p class="section-copy">All 12 stations are listed. Older readings show their observation date when a station is absent from the latest day.</p>
+      <div class="table-scroll"><table><thead><tr><th>Station / city</th><th>As of</th><th class="num">Temp °F</th><th class="num">Δ temp</th><th class="num">Dew °F</th><th class="num">Humidity</th><th class="num">Visibility mi</th><th class="num">Altimeter inHg</th><th class="num">Sea level mb</th></tr></thead><tbody id="today-table"><tr><td colspan="9" class="empty-cell">Waiting for observations.</td></tr></tbody></table></div>
+    </section>
+  </main>
+  <footer class="shell site-footer"><span>Public NWS observations · Daily UTC snapshots</span><span>Built from saved source pages</span></footer>
+  <script type="module" src="./js/today.js"></script>
+</body>
+</html>

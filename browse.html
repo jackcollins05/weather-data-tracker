@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1523">
+  <meta name="description" content="Search and compare U.S. airport weather observations.">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./assets/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./assets/icon-192.png">
+  <link rel="stylesheet" href="./css/styles.css">
+  <title>Browse · U.S. Weather Tracker</title>
+</head>
+<body data-page="browse">
+  <header class="site-header"><div class="shell header-inner">
+    <a class="brand" href="./index.html" aria-label="U.S. Weather Tracker home"><span class="brand-mark" aria-hidden="true">◒</span><span>U.S. Weather Tracker</span></a>
+    <nav class="nav" aria-label="Main navigation"><a href="./index.html">Today</a><a href="./browse.html" aria-current="page">Browse</a><a href="./trends.html">Trends</a></nav>
+    <span class="header-tag">NWS · 12 STATIONS</span>
+  </div></header>
+  <main class="shell page">
+    <section class="page-intro"><div><p class="eyebrow">Station directory</p><h1>Browse observations.</h1><p class="lede">Find a station, narrow the readings, and keep a shortlist on this device.</p></div><div class="run-meta"><span class="meta-label">LATEST DATA</span><strong id="browse-date">Awaiting first run</strong><span id="browse-run" class="muted">No run time yet</span></div></section>
+    <div id="data-message" class="notice" role="status" aria-live="polite">Loading observation data…</div>
+    <section class="card section controls-card" aria-label="Browse controls">
+      <div class="controls-grid">
+        <label class="field field-search">Search stations<input id="station-search" type="search" placeholder="Name or station ID" autocomplete="off"></label>
+        <label class="field">Station / city<select id="station-filter"><option value="all">All stations</option></select></label>
+        <label class="field">Temperature<select id="temperature-filter"><option value="all">All temperatures</option><option value="cold">Below 40°F</option><option value="mild">40–79°F</option><option value="hot">80°F and above</option><option value="missing">Missing reading</option></select></label>
+        <label class="field">Humidity<select id="humidity-filter"><option value="all">All humidity</option><option value="dry">Below 40%</option><option value="moderate">40–69%</option><option value="humid">70% and above</option><option value="missing">Missing reading</option></select></label>
+        <label class="field">Sort numeric value<select id="sort-field"><option value="temperature_f">Temperature °F</option><option value="dew_point_f">Dew point °F</option><option value="relative_humidity_pct">Humidity %</option><option value="visibility_miles">Visibility mi</option><option value="altimeter_inhg">Altimeter inHg</option><option value="sea_level_pressure_mb">Sea level pressure mb</option></select></label>
+        <div class="field"><span>Sort direction</span><button id="sort-direction" class="control-button" type="button" aria-label="Sort descending" data-direction="desc">High → low</button></div>
+      </div>
+      <label class="check-label"><input id="starred-only" type="checkbox"> Show starred stations only <span id="starred-count" class="muted">0 starred</span></label>
+    </section>
+    <section class="section card table-card">
+      <div class="section-heading"><div><p class="eyebrow">Compare readings</p><h2>All stations</h2></div><span id="browse-count" class="pill">12 STATIONS</span></div>
+      <p class="section-copy">Select a star to save a station to your local shortlist. Missing readings sort last.</p>
+      <div class="table-scroll"><table><thead><tr><th><span class="sr-only">Star</span></th><th>Station / city</th><th>As of</th><th class="num">Temp °F</th><th class="num">Dew °F</th><th class="num">Humidity</th><th class="num">Visibility mi</th><th class="num">Altimeter inHg</th><th class="num">Sea level mb</th></tr></thead><tbody id="browse-table"><tr><td colspan="9" class="empty-cell">Waiting for observations.</td></tr></tbody></table></div>
+    </section>
+  </main>
+  <footer class="shell site-footer"><span>Public NWS observations · Daily UTC snapshots</span><span>Stars stay in this browser</span></footer>
+  <script type="module" src="./js/browse.js"></script>
+</body>
+</html>
