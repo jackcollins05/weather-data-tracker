@@ -1,0 +1,13 @@
+date,item_id,item,source,temperature_f,dew_point_f,relative_humidity_pct,visibility_miles,altimeter_inhg,sea_level_pressure_mb
+2026-11-17,KATL,Atlanta,nws_obhistory,57.9,30.9,36,10.0,30.51,1033.4
+2026-11-17,KBOS,Boston,nws_obhistory,54,33.1,45,10.0,30.37,1028.4
+2026-11-17,KDEN,Denver,nws_obhistory,50,35.1,57,10.0,29.94,1011.2
+2026-11-17,KDFW,Dallas/Fort Worth,nws_obhistory,60.1,35.1,39,10.0,30.4,1029.2
+2026-11-17,KIAH,Houston,nws_obhistory,66,37.9,36,10.0,30.31,1026.2
+2026-11-17,KJFK,New York JFK,nws_obhistory,53.1,34,48,10.0,30.49,1032.5
+2026-11-17,KLAX,Los Angeles,nws_obhistory,64.9,35.1,33,10.0,30.06,1017.8
+2026-11-17,KLIT,Little Rock,nws_obhistory,55.9,37,49,10.0,30.48,1032.2
+2026-11-17,KMIA,Miami,nws_obhistory,80.1,69.1,69,10.0,30.14,1020.6
+2026-11-17,KORD,Chicago O'Hare,nws_obhistory,52,35.1,53,10.0,30.51,1033.3
+2026-11-17,KSEA,Seattle,nws_obhistory,48,39,71,10.0,30.0,1016.6
+2026-11-17,KXNA,Northwest Arkansas,nws_obhistory,53.1,32,45,10.0,30.45,1031.4

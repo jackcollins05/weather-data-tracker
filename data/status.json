@@ -1,0 +1,70 @@
+{
+  "run_time": "2026-11-17T18:02:31Z",
+  "first_run_date": "2026-11-17",
+  "days_with_success": 1,
+  "items": 12,
+  "new_today": 12,
+  "gone_today": 0,
+  "sources": [
+    {
+      "name": "KXNA",
+      "ok": true,
+      "count": 1
+    },
+    {
+      "name": "KLIT",
+      "ok": true,
+      "count": 1
+    },
+    {
+      "name": "KDFW",
+      "ok": true,
+      "count": 1
+    },
+    {
+      "name": "KIAH",
+      "ok": true,
+      "count": 1
+    },
+    {
+      "name": "KORD",
+      "ok": true,
+      "count": 1
+    },
+    {
+      "name": "KJFK",
+      "ok": true,
+      "count": 1
+    },
+    {
+      "name": "KLAX",
+      "ok": true,
+      "count": 1
+    },
+    {
+      "name": "KDEN",
+      "ok": true,
+      "count": 1
+    },
+    {
+      "name": "KMIA",
+      "ok": true,
+      "count": 1
+    },
+    {
+      "name": "KSEA",
+      "ok": true,
+      "count": 1
+    },
+    {
+      "name": "KBOS",
+      "ok": true,
+      "count": 1
+    },
+    {
+      "name": "KATL",
+      "ok": true,
+      "count": 1
+    }
+  ]
+}
