@@ -2,7 +2,10 @@ name: Daily weather data
 
 on:
   schedule:
+    # Primary: 09:17 UTC = 03:17 CST / 04:17 CDT.
     - cron: '17 9 * * *'
+    # Backup: 15:47 UTC = 09:47 CST / 10:47 CDT.
+    - cron: '47 15 * * *'
   workflow_dispatch:
 
 permissions:
