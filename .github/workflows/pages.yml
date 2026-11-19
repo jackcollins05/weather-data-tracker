@@ -1,0 +1,73 @@
+name: Deploy Weather Tracker site
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "index.html"
+      - "browse.html"
+      - "trends.html"
+      - "css/**"
+      - "js/**"
+      - "assets/**"
+      - "manifest.webmanifest"
+      - "service-worker.js"
+      - "data/status.json"
+      - "data/history.csv"
+      - ".github/workflows/pages.yml"
+
+  workflow_run:
+    workflows:
+      - "Daily weather data"
+    types:
+      - completed
+    branches:
+      - main
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: weather-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout latest production main
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+
+      - name: Build site artifact
+        run: |
+          mkdir -p site/data
+          cp index.html browse.html trends.html site/
+          cp -R css js assets site/
+          cp manifest.webmanifest service-worker.js site/
+          cp data/status.json data/history.csv site/data/
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
