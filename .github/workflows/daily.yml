@@ -4,8 +4,12 @@ on:
   schedule:
     # Primary: 09:17 UTC = 03:17 CST / 04:17 CDT.
     - cron: '17 9 * * *'
-    # Backup: 15:47 UTC = 09:47 CST / 10:47 CDT.
+    # Retry 1: 12:17 UTC = 06:17 CST / 07:17 CDT.
+    - cron: '17 12 * * *'
+    # Retry 2: 15:47 UTC = 09:47 CST / 10:47 CDT.
     - cron: '47 15 * * *'
+    # Final retry: 19:47 UTC = 13:47 CST / 14:47 CDT.
+    - cron: '47 19 * * *'
   workflow_dispatch:
 
 permissions:
@@ -23,19 +27,51 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.repository.default_branch }}
+
+      - name: Check whether today's production data already exists
+        id: daily_guard
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          LAST_DATE="$(python3 - <<'PY2'
+          import json
+          from pathlib import Path
+          status = json.loads(Path("data/status.json").read_text())
+          print(str(status.get("run_time", ""))[:10])
+          PY2
+          )"
+          TODAY="$(date -u +%F)"
+
+          echo "Event: $EVENT_NAME"
+          echo "Last production date: $LAST_DATE"
+          echo "Today's UTC date: $TODAY"
+
+          if [ "$EVENT_NAME" = "schedule" ] && [ "$LAST_DATE" = "$TODAY" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "Today's production data already exists. Skipping duplicate scheduled run."
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+            echo "Production run should proceed."
+          fi
       - uses: actions/setup-python@v5
+        if: steps.daily_guard.outputs.skip != 'true'
         with:
           python-version: '3.12'
       - uses: astral-sh/setup-uv@v10.3.3
+        if: steps.daily_guard.outputs.skip != 'true'
       - name: Test before fetching
+        if: steps.daily_guard.outputs.skip != 'true'
         run: uv run pytest -q
       - name: Fetch and rebuild data
+        if: steps.daily_guard.outputs.skip != 'true'
         run: uv run python -m weather_tracker.daily
       - name: Publish dated issue
+        if: steps.daily_guard.outputs.skip != 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: uv run python -m weather_tracker.publish_issue
       - name: Commit generated data only
+        if: steps.daily_guard.outputs.skip != 'true'
         env:
           TARGET_BRANCH: ${{ github.event.repository.default_branch }}
         run: |
