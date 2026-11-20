@@ -35,3 +35,15 @@ date,item_id,item,source,temperature_f,dew_point_f,relative_humidity_pct,visibil
 2026-11-19,KORD,Chicago O'Hare,nws_obhistory,62.1,43,50,10.0,30.27,1025.0
 2026-11-19,KSEA,Seattle,nws_obhistory,44.1,36,73,10.0,29.94,1014.7
 2026-11-19,KXNA,Northwest Arkansas,nws_obhistory,66.9,48,51,10.0,30.31,1026.0
+2026-11-20,KATL,Atlanta,nws_obhistory,62.1,44.1,52,10.0,30.33,1027.1
+2026-11-20,KBOS,Boston,nws_obhistory,51.1,33.1,50,10.0,30.31,1026.4
+2026-11-20,KDEN,Denver,nws_obhistory,44.1,16,32,10.0,29.95,1013.8
+2026-11-20,KDFW,Dallas/Fort Worth,nws_obhistory,63,52,68,10.0,30.19,1022.0
+2026-11-20,KIAH,Houston,nws_obhistory,62.1,57.9,86,10.0,30.18,1022.0
+2026-11-20,KJFK,New York JFK,nws_obhistory,52,46.9,83,10.0,30.36,1028.0
+2026-11-20,KLAX,Los Angeles,nws_obhistory,64,46.9,54,10.0,29.95,1014.1
+2026-11-20,KLIT,Little Rock,nws_obhistory,61,50,67,10.0,30.28,1025.6
+2026-11-20,KMIA,Miami,nws_obhistory,75.9,73,91,10.0,29.94,1013.8
+2026-11-20,KORD,Chicago O'Hare,nws_obhistory,57.9,44.1,60,10.0,30.26,1024.8
+2026-11-20,KSEA,Seattle,nws_obhistory,45,36,71,10.0,29.96,1015.3
+2026-11-20,KXNA,Northwest Arkansas,nws_obhistory,57,46,67,10.0,30.27,1024.8
