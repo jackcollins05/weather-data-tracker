@@ -1,3 +1,4 @@
+import { initMap } from "./weather-map.js";
 import {
   STATIONS, create, formatDelta, formatMetric, formatNumber, formatRunTime,
   latestByStation, latestDates, loadData, registerServiceWorker,
@@ -7,17 +8,9 @@ import {
 registerServiceWorker();
 
 function renderCounts(status) {
-  const values = {
-    "count-items": status?.items,
-    "count-new": status?.new_today,
-    "count-gone": status?.gone_today,
-    "count-days": status?.days_with_success,
-  };
-  for (const [id, value] of Object.entries(values)) {
-    document.getElementById(id).textContent = value ?? "—";
-  }
-  document.getElementById("first-run").textContent = `First run: ${status?.first_run_date || "—"}`;
   document.getElementById("last-run").textContent = formatRunTime(status?.run_time);
+  const ok = (status?.sources || []).filter(source => source.ok).length;
+  document.getElementById("health-summary").textContent = status ? `${ok} / ${STATIONS.length} sources reporting · NWS observation pages` : "Collection status unavailable";
 }
 
 function renderSources(status) {
@@ -29,7 +22,7 @@ function renderSources(status) {
     const chip = create("div", "source-chip");
     chip.title = `${station.name}: ${source ? source.ok ? "fetched" : "fetch failed" : "no run yet"}`;
     chip.append(create("span", `status-dot ${source ? source.ok ? "ok" : "bad" : ""}`),
-      create("strong", "", station.id), create("span", "", station.name));
+      create("strong", "", station.id), create("span", "", source ? source.ok ? "Healthy" : "Failed" : "Unknown"));
     container.append(chip);
   }
 }
@@ -42,19 +35,20 @@ function renderMoves(history) {
   container.replaceChildren();
   container.classList.remove("empty-state");
   context.textContent = previous
-    ? `Latest ${latest} compared with previous successful date ${previous}. Ranked by absolute temperature change.`
+    ? `Largest temperature changes · ${previous} to ${latest}`
     : "Temperature moves appear after two successful observation dates.";
   if (!moves.length) {
     container.append(create("p", "empty-state", previous ? "No comparable temperature readings yet." : "Waiting for a second observation date."));
     return;
   }
   moves.forEach((move, index) => {
-    const row = create("div", "move-row");
+    const row = create("button", "move-row");
+    row.type = "button"; row.dataset.station = move.id;
     const station = create("div");
-    station.append(create("span", "move-name", move.name),
-      create("span", "move-detail", `${move.id} · ${formatNumber(move.old)}°F → ${formatNumber(move.value)}°F`));
-    row.append(create("span", "move-rank", String(index + 1)), station,
-      create("span", "move-delta", formatDelta(move.change)));
+    station.append(create("b", "move-code", move.id),
+      create("span", "move-city", move.name));
+    row.append(create("span", "move-rank", String(index + 1).padStart(2, "0")), station,
+      create("span", move.change > 0 ? "positive" : "negative", formatDelta(move.change)));
     container.append(row);
   });
 }
@@ -65,7 +59,7 @@ function renderTable(history) {
   const todayRows = rowsOn(history, latest);
   const priorRows = rowsOn(history, previous);
   const body = document.getElementById("today-table");
-  document.getElementById("latest-date").textContent = latest ? `Latest observation date: ${latest}` : "No observation date yet";
+  document.getElementById("latest-date").textContent = latest ? `12 airport stations · Observations for ${latest}` : "No observation date yet";
   document.getElementById("table-date").textContent = latest ? `${latest} · UTC` : "NO DATA YET";
   body.replaceChildren();
   for (const station of STATIONS) {
@@ -75,8 +69,9 @@ function renderTable(history) {
     const delta = current?.temperature_f != null && previousRow?.temperature_f != null
       ? current.temperature_f - previousRow.temperature_f : null;
     const tr = create("tr");
+    tr.dataset.station = station.id;
     const name = create("td");
-    name.append(create("span", "station-name", station.name), create("span", "station-id", station.id));
+    name.append(create("button", "station-code", station.id), create("span", "station-city", station.name));
     const asOf = create("td", "", row?.date || "—");
     if (row && row.date !== latest) asOf.append(create("span", "stale", "OLDER"));
     tr.append(name, asOf);
@@ -104,6 +99,7 @@ loadData().then((data) => {
   renderSources(data.status);
   renderMoves(data.history);
   renderTable(data.history);
+  initMap(data);
 }).catch(() => {
   document.getElementById("data-message").textContent = "Observation data could not be loaded. Try again when a connection is available.";
 });

@@ -113,7 +113,9 @@ for (const station of STATIONS) {
     if (checkbox.checked) selected.add(station.id); else selected.delete(station.id);
     renderMetricCharts();
   });
-  label.append(checkbox, create("span", "", station.name), create("small", "", station.id));
+  label.title = station.name;
+  checkbox.setAttribute("aria-label", station.id + " · " + station.name);
+  label.append(checkbox, create("strong", "", station.id));
   picker.append(label);
 }
 function chooseAll(checked) {

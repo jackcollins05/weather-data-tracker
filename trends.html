@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0b1523">
+  <meta name="theme-color" content="#08121a">
   <meta name="description" content="Explore trends in U.S. airport weather observations.">
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="icon" href="./assets/icon.svg" type="image/svg+xml">
@@ -15,23 +15,23 @@
   <header class="site-header"><div class="shell header-inner">
     <a class="brand" href="./index.html" aria-label="U.S. Weather Tracker home"><span class="brand-mark" aria-hidden="true">◒</span><span>U.S. Weather Tracker</span></a>
     <nav class="nav" aria-label="Main navigation"><a href="./index.html">Today</a><a href="./browse.html">Browse</a><a href="./trends.html" aria-current="page">Trends</a></nav>
-    <span class="header-tag">NWS · 12 STATIONS</span>
+    <span class="header-tag">NWS • 12 stations</span>
   </div></header>
   <main class="shell page">
-    <section class="page-intro"><div><p class="eyebrow">Historical lens</p><h1>Patterns over time.</h1><p class="lede">Every chart and finding is computed in your browser from the growing observation history.</p></div><div class="run-meta"><span class="meta-label">HISTORY WINDOW</span><strong id="trend-window">Awaiting first run</strong><span id="trend-run" class="muted">No run time yet</span></div></section>
+    <section class="page-intro"><div><p class="eyebrow">Historical lens</p><h1>Patterns over time</h1><p class="lede">Compare daily airport readings across six measurements.</p></div><div class="run-meta"><span class="meta-label">History window</span><strong id="trend-window">Awaiting first run</strong><span id="trend-run" class="muted">No run time yet</span></div></section>
     <div id="data-message" class="notice" role="status" aria-live="polite">Loading observation data…</div>
     <section class="card section controls-card">
-      <div class="section-heading"><div><p class="eyebrow">Chart controls</p><h2>Choose stations</h2></div><span id="selected-count" class="pill">0 SELECTED</span></div>
+      <div class="section-heading"><div><h2>Choose stations</h2></div><span id="selected-count" class="pill">0 SELECTED</span></div>
       <p class="section-copy">Select one or more stations for the six time-series charts. Findings use the full history.</p>
       <div class="selection-toolbar"><button id="select-all" class="control-button" type="button">Show all</button><button id="select-none" class="control-button" type="button">Clear selection</button></div>
       <div id="station-selection" class="station-check-grid" role="group" aria-label="Stations shown in charts"></div>
     </section>
-    <section class="section"><div class="section-heading"><div><p class="eyebrow">Six measurements</p><h2>Observation timelines</h2></div><span class="pill">UTC DATES</span></div><div id="metric-charts" class="chart-grid"></div></section>
-    <section class="section"><div class="section-heading"><div><p class="eyebrow">Computed findings</p><h2>What the history shows</h2></div><span class="pill">FROM HISTORY.CSV</span></div><div id="finding-sections" class="finding-grid">
-      <article class="card finding-card" id="finding-shift"><p class="eyebrow">Finding 01</p><h3>Largest first-to-latest temperature shift</h3><p class="finding-description">Waiting for enough observations.</p><div class="chart-wrap"></div><p class="method">Computed from each station’s first and latest non-missing temperature in history.csv.</p></article>
-      <article class="card finding-card" id="finding-spread"><p class="eyebrow">Finding 02</p><h3>Widest daily temperature spread</h3><p class="finding-description">Waiting for enough observations.</p><div class="chart-wrap"></div><p class="method">Computed as the daily maximum minus minimum station temperature in history.csv.</p></article>
-      <article class="card finding-card" id="finding-humidity"><p class="eyebrow">Finding 03</p><h3>Highest average relative humidity</h3><p class="finding-description">Waiting for observations.</p><div class="chart-wrap"></div><p class="method">Computed as the arithmetic mean of each station’s non-missing humidity readings in history.csv.</p></article>
-      <article class="card finding-card" id="finding-range"><p class="eyebrow">Finding 04</p><h3>Greatest temperature range</h3><p class="finding-description">Waiting for enough observations.</p><div class="chart-wrap"></div><p class="method">Computed as each station’s maximum minus minimum non-missing temperature in history.csv.</p></article>
+    <section class="section"><div class="section-heading"><div><h2>Observation timelines</h2></div><span class="pill">UTC DATES</span></div><div id="metric-charts" class="chart-grid"></div></section>
+    <section class="section"><div class="section-heading"><div><h2>What the history shows</h2></div></div><div id="finding-sections" class="finding-grid">
+      <article class="card finding-card" id="finding-shift"><h3>Largest first-to-latest temperature shift</h3><p class="finding-description">Waiting for enough observations.</p><div class="chart-wrap"></div><p class="method">Computed from each station’s first and latest non-missing temperature in history.csv.</p></article>
+      <article class="card finding-card" id="finding-spread"><h3>Widest daily temperature spread</h3><p class="finding-description">Waiting for enough observations.</p><div class="chart-wrap"></div><p class="method">Computed as the daily maximum minus minimum station temperature in history.csv.</p></article>
+      <article class="card finding-card" id="finding-humidity"><h3>Highest average relative humidity</h3><p class="finding-description">Waiting for observations.</p><div class="chart-wrap"></div><p class="method">Computed as the arithmetic mean of each station’s non-missing humidity readings in history.csv.</p></article>
+      <article class="card finding-card" id="finding-range"><h3>Greatest temperature range</h3><p class="finding-description">Waiting for enough observations.</p><div class="chart-wrap"></div><p class="method">Computed as each station’s maximum minus minimum non-missing temperature in history.csv.</p></article>
     </div></section>
   </main>
   <footer class="shell site-footer"><span>Public NWS observations · Daily UTC snapshots</span><span>Charts calculate locally</span></footer>
