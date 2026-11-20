@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0b1523">
+  <meta name="theme-color" content="#08121a">
   <meta name="description" content="Daily U.S. airport weather observations from the National Weather Service.">
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="icon" href="./assets/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="./assets/icon-192.png">
   <link rel="stylesheet" href="./css/styles.css">
+  <link rel="stylesheet" href="./css/today.css">
   <title>Today · U.S. Weather Tracker</title>
 </head>
 <body data-page="today">
@@ -20,38 +21,31 @@
         <a href="./browse.html">Browse</a>
         <a href="./trends.html">Trends</a>
       </nav>
-      <span class="header-tag">NWS · 12 STATIONS</span>
+      <span class="header-tag">NWS • 12 stations</span>
     </div>
   </header>
   <main class="shell page">
     <section class="page-intro">
-      <div><p class="eyebrow">Daily observation desk</p><h1>Weather at a glance.</h1><p class="lede">A clear view of the latest airport observations and what changed across the United States.</p></div>
-      <div class="run-meta"><span class="meta-label">LAST RUN · UTC</span><strong id="last-run">Awaiting first run</strong><span id="latest-date" class="muted">No observation date yet</span></div>
+      <div><p class="eyebrow">Daily observation desk</p><h1>U.S. Weather Network</h1><p id="latest-date" class="lede">Loading airport observations…</p></div>
+      <div class="run-meta"><span class="meta-label">Last collection</span><strong id="last-run">Awaiting first run</strong></div>
     </section>
-    <div id="data-message" class="notice" role="status" aria-live="polite">Loading observation data…</div>
-    <section class="stat-grid" aria-label="Daily counts">
-      <article class="stat-card"><span>Items today</span><strong id="count-items">—</strong><small>Rows on the latest run date</small></article>
-      <article class="stat-card"><span>New today</span><strong id="count-new">—</strong><small>Since previous successful date</small></article>
-      <article class="stat-card"><span>Gone today</span><strong id="count-gone">—</strong><small>Since previous successful date</small></article>
-      <article class="stat-card"><span>Days with data</span><strong id="count-days">—</strong><small id="first-run">First run: —</small></article>
+    <div id="data-message" class="notice" role="status">Loading observation data…</div>
+    <section class="atlas" aria-label="Airport observation map">
+      <div class="atlas-head"><span><i></i> Airport observations</span><time id="utc-clock" aria-label="Current UTC time"></time><button id="map-pulse" title="Play decorative lightning animation">ϟ &nbsp; Weather pulse</button></div>
+      <svg id="network" viewBox="0 0 1000 619" role="group" aria-label="Contiguous United States airport network">
+        <image class="land" href="./assets/conus.svg" width="1000" height="619"/>
+        <g id="routes" aria-hidden="true"></g><g id="planes" aria-hidden="true"></g><g id="lightning" aria-hidden="true"></g><g id="nodes"></g>
+      </svg>
+      <div id="airport-tip" role="tooltip" hidden></div>
+      <div class="atlas-foot"><span>Station temperature · °F</span><span>Illustrative aircraft &amp; routes</span></div>
     </section>
-    <section class="section split-section">
-      <div class="card">
-        <div class="section-heading"><div><p class="eyebrow">Change watch</p><h2>Biggest temperature moves</h2></div><span class="pill">TOP 5 · °F</span></div>
-        <p id="moves-context" class="section-copy">Comparing the latest and previous successful observation dates.</p>
-        <div id="biggest-moves" class="move-list empty-state">Waiting for observations.</div>
-      </div>
-      <div class="card">
-        <div class="section-heading"><div><p class="eyebrow">Collection health</p><h2>Source status</h2></div><span class="pill">LIVE HTML</span></div>
-        <p class="section-copy">Each station is fetched independently from public NWS observation-history pages.</p>
-        <div id="source-status" class="source-grid"></div>
-      </div>
-    </section>
-    <section class="section card table-card">
-      <div class="section-heading"><div><p class="eyebrow">Observation board</p><h2>Latest station values</h2></div><span id="table-date" class="pill">NO DATA YET</span></div>
-      <p class="section-copy">All 12 stations are listed. Older readings show their observation date when a station is absent from the latest day.</p>
+    <section id="national-summary" aria-label="Network summary"></section>
+    <section id="station-detail" aria-live="polite" aria-label="Station details"></section>
+    <section class="movement"><h2>Daily movement</h2><p id="moves-context"></p><div id="biggest-moves"></div></section>
+    <section class="observations"><div class="section-heading"><h2>Latest observations</h2><span id="table-date"></span></div>
       <div class="table-scroll"><table><thead><tr><th>Station / city</th><th>As of</th><th class="num">Temp °F</th><th class="num">Δ temp</th><th class="num">Dew °F</th><th class="num">Humidity</th><th class="num">Visibility mi</th><th class="num">Altimeter inHg</th><th class="num">Sea level mb</th></tr></thead><tbody id="today-table"><tr><td colspan="9" class="empty-cell">Waiting for observations.</td></tr></tbody></table></div>
     </section>
+    <details class="health"><summary><span id="health-summary">Collection health</span><span>View stations</span></summary><div id="source-status"></div></details>
   </main>
   <footer class="shell site-footer"><span>Public NWS observations · Daily UTC snapshots</span><span>Built from saved source pages</span></footer>
   <script type="module" src="./js/today.js"></script>

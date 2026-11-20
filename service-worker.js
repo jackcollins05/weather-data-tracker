@@ -1,8 +1,8 @@
-const SHELL_CACHE = "weather-shell-v1";
+const SHELL_CACHE = "weather-shell-v3";
 const DATA_CACHE = "weather-data-v1";
 const SHELL = [
   "./index.html", "./browse.html", "./trends.html",
-  "./css/styles.css", "./js/common.js", "./js/today.js", "./js/browse.js",
+  "./assets/conus.svg", "./css/today.css", "./js/weather-map.js", "./css/styles.css", "./js/common.js", "./js/today.js", "./js/browse.js",
   "./js/trends.js", "./js/charts.js", "./manifest.webmanifest",
   "./assets/icon.svg", "./assets/icon-192.png", "./assets/icon-512.png",
 ];

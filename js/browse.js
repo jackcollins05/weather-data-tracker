@@ -87,7 +87,7 @@ function render() {
     star.addEventListener("click", () => toggleStar(station.id));
     starCell.append(star);
     const name = create("td");
-    name.append(create("span", "station-name", station.name), create("span", "station-id", station.id));
+    name.append(create("strong", "directory-code", station.id), create("span", "station-city", station.name));
     tr.append(starCell, name, create("td", "", data?.date || "—"));
     for (const key of ["temperature_f", "dew_point_f", "relative_humidity_pct", "visibility_miles", "altimeter_inhg", "sea_level_pressure_mb"]) {
       const value = data ? formatMetric(data[key], key) : "—";

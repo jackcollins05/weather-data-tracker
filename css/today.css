@@ -1,0 +1,105 @@
+.atlas-head,.atlas-foot,.health summary,.station-values {display:flex}
+.atlas-head,.atlas-foot,.health summary {justify-content:space-between;align-items:center;gap:12px}
+.reading small,.atlas-foot,#moves-context,#table-date {font-size:12px;color:var(--muted)}
+.atlas {position:relative;isolation:isolate;overflow:hidden;background:radial-gradient(ellipse at 48% 45%,#182632,#09141d 75%);border-block:1px solid var(--line)}
+.atlas-head,.atlas-foot {position:relative;z-index:2;padding:9px 20px}
+.atlas-head {font-size:13px;color:#d5dce0}
+.atlas-head i {display:inline-block;width:7px;height:7px;border:1px solid #c5d9ce;border-radius:50%;margin-right:6px}
+button,.health summary {color:inherit}
+#map-pulse,.close {background:transparent;border:1px solid #42505a;padding:9px 14px;border-radius:3px;font-size:12px;min-height:40px}
+#map-pulse:hover,.close:hover {background:#263842}
+#network {display:block;width:100%;height:clamp(370px,49vw,580px);overflow:visible}
+#routes path {fill:none;stroke:#a3b4be;stroke-width:1.2;stroke-dasharray:4 5;opacity:.52;transition:opacity .25s}
+.has-selection #routes path {opacity:.16}
+.has-selection #routes .connected {opacity:.94;stroke:#dbe5e4;stroke-width:1.8}
+#planes {fill:#d0d9dd;opacity:.77;pointer-events:none}
+.beacon {cursor:pointer;outline:none;transition:opacity .25s}
+.beacon text {fill:#f4f2ea;font:700 13px ui-monospace,monospace;paint-order:stroke;stroke:#13212b;stroke-width:3;stroke-linejoin:round}
+.beacon .map-temp {fill:currentColor;font-size:12px}
+.halo,.ring {fill:#0b1821;stroke:currentColor}
+.halo {opacity:.23}
+.ring {stroke-width:2}
+.has-selection .beacon:not(.selected) {opacity:.67}
+.beacon:is(:hover,:focus-visible,.selected) .halo {opacity:1;stroke-width:2}
+.atlas-foot {font-size:11px}
+#national-summary {display:grid;grid-template-columns:repeat(5,1fr);padding:18px 0;border-bottom:1px solid var(--line)}
+.reading {display:flex;flex-direction:column;font-variant-numeric:tabular-nums}
+#national-summary .reading {padding-left:20px;border-left:1px solid var(--line)}
+#national-summary .reading:first-child {padding-left:0;border:0}
+.reading strong {font-weight:540}
+#national-summary strong {font-size:clamp(21px,2.6vw,36px);line-height:1.25;letter-spacing:-.05em}
+.reading span,.station-title span {color:#a4b5bf;font-size:11px}
+#station-detail {position:relative;display:flex;align-items:center;gap:25px;border-bottom:1px solid var(--line);padding:16px 0}
+#station-detail p {font-size:13px;color:var(--muted);margin:0}
+.station-title {min-width:150px}
+.station-title h2 {margin:4px 0;font-size:19px}
+.spark {display:block;width:100px;height:25px;color:#bacfc8}
+.station-values {gap:18px;flex-wrap:wrap;flex:1}
+.station-values strong {font-size:15px}
+.movement,.observations {margin:32px 0}
+.movement h2,.observations h2 {font:500 26px Georgia,serif}
+#moves-context {margin:6px 0 14px}
+#biggest-moves {max-width:850px}
+.move-row {display:grid;grid-template-columns:28px 1fr auto;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:9px 4px;color:inherit}
+.move-rank {background:none;color:#8b9da9}
+.move-city,.station-city {margin-left:14px;color:#a4b3bc;font-size:13px}
+.station-code {background:none;color:inherit;border:0;font-weight:700;padding:5px}
+.move-row:hover,.move-row.selected,tr.selected {background:#20303b}
+td {padding:5px 10px}
+tr[data-station],summary {cursor:pointer}
+.health {border-block:1px solid var(--line);padding:12px 0;font-size:13px}
+.health summary span:last-child {text-decoration:underline}
+#source-status {display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:4px;padding-top:12px}
+.source-chip {border:0;background:none}
+.atlas::after {content:"";position:absolute;pointer-events:none;inset:0;opacity:0;background:linear-gradient(100deg,transparent 42%,#c4e3ef22 49%,transparent 52%)}
+@media(prefers-reduced-motion:no-preference){
+  .scanning::after {animation:sweep 1.65s ease-out}
+  .scanning .halo {animation:beacon-pulse .6s ease-out var(--delay)}
+  .selected .ring {animation:beacon-pulse .7s ease-out}
+  .station-values {animation:drawer .23s ease-out}
+  .atlas::before {content:"";position:absolute;inset:10% 0;pointer-events:none;background:repeating-radial-gradient(ellipse at 2% 90%,transparent 0 37px,#91aab509 38px,transparent 39px 54px);animation:drift 24s ease-in-out infinite alternate;z-index:-1}
+}
+@keyframes sweep {0%{transform:translateX(-60%);opacity:0}20%,80%{opacity:1}100%{transform:translateX(65%);opacity:0}}
+@keyframes beacon-pulse {50%{transform:scale(1.5);opacity:.9}}
+@keyframes drawer {from{transform:translateY(4px);opacity:.4}}
+@keyframes drift {to{transform:translate(1%,1%)}}
+@media(max-width:750px){
+
+
+
+ .atlas {margin-inline:-14px}
+ #network {height:auto;min-height:220px}
+ .atlas-head,.atlas-foot {padding:8px 14px}
+ #planes g:nth-child(n+2){display:none}
+ .beacon text {font-size:23px}
+ .beacon .map-temp {display:none}
+ #national-summary {grid-template-columns:repeat(3,1fr);gap:14px}
+ #national-summary .reading {border:0;padding:0}
+ #station-detail {flex-wrap:wrap;gap:14px}
+ .station-values {flex-basis:100%}
+ .close {position:absolute;top:16px;right:0}
+ .move-city {margin-left:9px}
+}
+@media(max-width:750px) {
+  .beacon circle:first-child {r:36px}
+  .station-code {min-height:42px}
+  .move-row {min-height:44px}
+}
+#utc-clock {margin-left:auto;color:var(--muted);font:12px var(--mono);font-variant-numeric:tabular-nums}
+#airport-tip {position:absolute;left:14px;bottom:38px;pointer-events:none;background:#0d1a24;border-left:2px solid var(--accent);padding:6px 11px;font-size:12px}
+#airport-tip:not([hidden]) {display:grid}
+#airport-tip strong {font-family:var(--mono)}
+#airport-tip span:last-child,.spark-context {color:var(--muted);font-size:11px}
+#lightning {pointer-events:none;fill:none;stroke:#d0dfeb;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+#lightning path {opacity:0}
+.beacon.selected .ring {r:7.5px}
+.atlas-head,.atlas-foot {transition:opacity .15s}
+.scanning :is(.atlas-head,.atlas-foot) {opacity:.83}
+@media(prefers-reduced-motion:no-preference){
+  .scanning #lightning path {animation:electrical-flash .19s var(--flash-delay) ease-out}
+  .scanning .land {animation:land-flashes 1.65s linear}
+}
+@keyframes electrical-flash {0%{opacity:0}12%{opacity:.88}100%{opacity:0}}
+@keyframes land-flashes {0%,10%,22%,41%,53%,72%,85%,100%{filter:brightness(1)}12%,43%,74%{filter:brightness(1.16)}}
+@media(prefers-reduced-motion:reduce){.scanning .land {filter:brightness(1.08)}}
+@media(max-width:560px){#utc-clock {font-size:10px}.atlas-head {gap:6px;font-size:11px}}
